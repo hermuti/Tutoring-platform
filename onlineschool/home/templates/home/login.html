@@ -1,0 +1,35 @@
+{% extends "base.html" %} {% block title %}Login - Online School{% endblock %}
+{% block content %}
+<div class="auth-container">
+  <h2 class="text-center mb-4">Login</h2>
+
+  {% if form.errors %}
+  <p class="error">Invalid username, password, or role. Please try again.</p>
+  {% endif %}
+
+  <form method="post">
+    {% csrf_token %} {{ form.non_field_errors }}
+
+    <div class="form-group">
+      <label for="{{ form.username.id_for_label }}">Username:</label>
+      {{ form.username }}
+    </div>
+
+    <div class="form-group">
+      <label for="{{ form.password.id_for_label }}">Password:</label>
+      {{ form.password }}
+    </div>
+
+    <div class="form-group">
+      <label for="{{ form.role.id_for_label }}">Role:</label>
+      {{ form.role }}
+    </div>
+
+    <button type="submit">Login</button>
+  </form>
+
+  <p class="mt-4 text-center">
+    Don't have an account? <a href="{% url 'home:register' %}">Register here</a>
+  </p>
+</div>
+{% endblock %}
