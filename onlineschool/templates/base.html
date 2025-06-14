@@ -1,63 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>{% block title %}Online School{% endblock %}</title>
-    <style>
-      body {
-        font-family: sans-serif;
-      }
+<head>
+  <meta charset="UTF-8" />
+  <title>{% block title %}Online School{% endblock %}</title>
+  <style>
+    body {
+      font-family: sans-serif;
+    }
 
-      .auth-container {
-        width: 350px;
-        margin: 50px auto;
-        border: 1px solid #ccc;
-        padding: 20px;
-        border-radius: 8px;
-      }
+    .auth-container {
+      width: 350px;
+      margin: 50px auto;
+      border: 1px solid #ccc;
+      padding: 20px;
+      border-radius: 8px;
+    }
 
-      .form-group {
-        margin-bottom: 15px;
-      }
+    .form-group {
+      margin-bottom: 15px;
+    }
 
-      label {
-        display: block;
-        margin-bottom: 5px;
-      }
+    label {
+      display: block;
+      margin-bottom: 5px;
+    }
 
-      input,
-      select {
-        width: 100%;
-        padding: 8px;
-      }
+    input, select {
+      width: 100%;
+      padding: 8px;
+    }
 
-      button {
-        padding: 10px;
-        width: 100%;
-        background-color: #007bff;
-        color: white;
-        border: none;
-      }
+    button {
+      padding: 10px;
+      width: 100%;
+      background-color: #007bff;
+      color: white;
+      border: none;
+    }
 
-      .error {
-        color: red;
-        margin-bottom: 10px;
-      }
+    .error {
+      color: red;
+      margin-bottom: 10px;
+    }
 
-      .text-center {
-        text-align: center;
-      }
+    .text-center {
+      text-align: center;
+    }
 
-      .mt-4 {
-        margin-top: 1.5rem;
-      }
+    .mt-4 {
+      margin-top: 1.5rem;
+    }
 
-      a {
-        color: #007bff;
-      }
-    </style>
-  </head>
-  <body>
-    {% block content %}{% endblock %}
-  </body>
+    a {
+      color: #007bff;
+    }
+  </style>
+</head>
+<body>
+  {% if messages %}
+    <ul class="messages">
+      {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+  {% block content %}{% endblock %}
+</body>
 </html>

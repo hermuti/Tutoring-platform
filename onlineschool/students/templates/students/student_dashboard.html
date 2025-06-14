@@ -1,0 +1,75 @@
+{% extends "students/base.html" %} {% load static %} {% block title %}Student
+Dashboard - Online School{% endblock %} {% block content %}
+<div class="dashboard-content-area">
+  <h1>Student Dashboard</h1>
+
+  <div class="dashboard-wrapper">
+    <div class="dashboard-sidebar">
+      {% include "students/sidebar.html" with current_user=request.user %}
+    </div>
+
+    <div class="dashboard-main-content">
+      <div class="welcome-banner">
+        <h2>Welcome back, {{ request.user.first_name|default:"User" }}!</h2>
+      </div>
+
+      <div class="upcoming-sessions-section">
+        <h3>Upcoming Sessions</h3>
+        {% if upcoming_sessions %} {% for session in upcoming_sessions %}
+        <div class="session-card">
+          <div class="session-header">
+            <h4 class="session-course">{{ session.subject }}</h4>
+            <span class="session-time-tag"
+              >{{ session.start_time|date:"D, g:i A" }}</span
+            >
+          </div>
+          <p class="session-tutor">
+            Tutor: {{
+            session.tutor.user.get_full_name|default:session.tutor.user.username
+            }}
+          </p>
+          <p class="session-status">Status: {{ session.status }}</p>
+          <div class="session-actions">
+            <form
+              action="{% url 'students:session_action' pk=session.pk action='join' %}"
+              method="post"
+              style="display: inline"
+            >
+              {% csrf_token %}
+              <button type="submit" class="btn btn-primary">
+                Join Session
+              </button>
+            </form>
+            <form
+              action="{% url 'students:session_action' pk=session.pk action='reschedule' %}"
+              method="post"
+              style="display: inline"
+            >
+              {% csrf_token %}
+              <button type="submit" class="btn btn-secondary">
+                Reschedule
+              </button>
+            </form>
+            <a
+              href="{% url 'students:session_detail' pk=session.pk %}"
+              class="btn btn-info"
+              >View Details</a
+            >
+            <form
+              action="{% url 'students:session_action' pk=session.pk action='cancel' %}"
+              method="post"
+              style="display: inline"
+            >
+              {% csrf_token %}
+              <button type="submit" class="btn btn-danger">Cancel</button>
+            </form>
+          </div>
+        </div>
+        {% endfor %} {% else %}
+        <p class="no-sessions-message">No upcoming sessions found.</p>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  {% endblock %}
+</div>

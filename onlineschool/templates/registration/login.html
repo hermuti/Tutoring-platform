@@ -1,0 +1,28 @@
+{% extends "students/base.html" %} {% block title %}Login{% endblock %} {% block
+content %}
+<div class="login-container">
+  <h2>Login</h2>
+  {% if form.errors %}
+  <p class="error-message">
+    Your username and password didn't match. Please try again.
+  </p>
+  {% endif %} {% if next %} {% if user.is_authenticated %}
+  <p class="info-message">
+    Your account doesn't have access to this page. To proceed, please login with
+    an account that has access.
+  </p>
+  {% else %}
+  <p class="info-message">Please login to see this page.</p>
+  {% endif %} {% endif %}
+
+  <form method="post" action="{% url 'login' %}">
+    {% csrf_token %} {# Essential for POST forms [35] #}
+    <p>{{ form.username.label_tag }} {{ form.username }}</p>
+    <p>{{ form.password.label_tag }} {{ form.password }}</p>
+    <input type="submit" value="Login" />
+    <input type="hidden" name="next" value="{{ next }}" />
+  </form>
+  <p><a href="{% url 'password_reset' %}">Lost password?</a></p>
+  {# Assumes you configured password reset URLs [36] #}
+</div>
+{% endblock %}

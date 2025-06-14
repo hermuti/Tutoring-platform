@@ -21,7 +21,7 @@ class CustomLoginView(LoginView):
 
         login(self.request, user)
         if role == 'student':
-            return redirect('students:dashboard')  # Change based on your URLs
+            return redirect('students:student_dashboard')  # Change based on your URLs
         elif role == 'teacher':
             return redirect('teachers:dashboard')
         else:

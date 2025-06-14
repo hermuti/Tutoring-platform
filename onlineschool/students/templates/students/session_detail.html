@@ -1,0 +1,33 @@
+{% extends "students/base.html" %} {% block title %}Session Details{% endblock
+%} {% block content %}
+<div class="session-details-page">
+  <h1>Session Details</h1>
+  {% if session %}
+  <div class="details-card">
+    <p><strong>Subject:</strong> {{ session.subject }}</p>
+    <p>
+      <strong>Tutor:</strong> {{
+      session.tutor.user.get_full_name|default:session.tutor.user.username }}
+    </p>
+    <p>
+      <strong>Student:</strong> {{
+      session.student.user.get_full_name|default:session.student.user.username
+      }}
+    </p>
+    <p>
+      <strong>Date & Time:</strong> {{ session.start_time|date:"F j, Y, P" }}
+    </p>
+    <p><strong>Status:</strong> {{ session.get_status_display }}</p>
+    {# Uses the get_FOO_display for choice fields [44] #} {# Add more details
+    specific to a session if your model includes them #}
+  </div>
+  <p>
+    <a href="{% url 'students:student_dashboard' %}" class="btn btn-secondary"
+      >Back to Dashboard</a
+    >
+  </p>
+  {% else %}
+  <p>Session not found or you do not have permission to view this session.</p>
+  {% endif %}
+</div>
+{% endblock content %}

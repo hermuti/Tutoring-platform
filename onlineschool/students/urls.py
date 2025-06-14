@@ -1,10 +1,16 @@
 from django.urls import path
-from . import views
+from . import views # Import views from your current app
 
-app_name = 'students'
+app_name = "students" # Define the application namespace [32, 34]
 
 urlpatterns = [
-    path('dashboard/', views.student_dashboard, name='dashboard'),
-    path('', views.student_list, name='student_list'),
-    path('<int:pk>/', views.student_detail, name='student_detail'),
+    # URL for the main student dashboard
+    path("dashboard/", views.StudentDashboardView.as_view(), name="student_dashboard"),
+    
+    # URL for a specific session's details
+    path("sessions/<int:pk>/", views.SessionDetailView.as_view(), name="session_detail"),
+    
+    # URL to handle actions on sessions (e.g., cancel, join, reschedule)
+    # <str:action> captures the action keyword (e.g., 'cancel', 'join')
+    path("sessions/<int:pk>/<str:action>/", views.SessionActionView.as_view(), name="session_action"),
 ]
