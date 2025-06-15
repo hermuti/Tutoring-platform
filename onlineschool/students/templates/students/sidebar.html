@@ -33,9 +33,12 @@ Font Awesome link in
       </li>
       {% if request.user.is_authenticated %}
       <li>
-        <a href="{% url 'accounts:logout' %}"
-          ><i class="fas fa-sign-out-alt"></i> Log Out</a
-        >
+        <form method="post" action="{% url 'accounts:logout' %}">
+          {% csrf_token %}
+          <button type="submit">
+            <i class="fas fa-sign-out-alt"></i> Log Out
+          </button>
+        </form>
       </li>
       {% else %}
       <li>
