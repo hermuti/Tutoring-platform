@@ -1,17 +1,33 @@
 from django.shortcuts import render
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
+from .serializers import SessionSerializer
+from students.models import Session, Tutor
+from django.utils import timezone
+
+from django.shortcuts import render
+from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
-# from .models import TeacherProfile # Create TeacherProfile model
-from .models import Teacher
+from students.models import Session, Tutor
+from django.utils import timezone
+from django.contrib.auth.models import User
 
 @login_required
-def teacher_dashboard(request):
-    # teacher = TeacherProfile.objects.get(user=request.user) # Uncomment when TeacherProfile exists
-    return render(request, 'teachers/dashboard.html', {'teacher': request.user})
+def tutor_dashboard(request):
+    try:
+        tutor = Tutor.objects.get(user=request.user)
+    except Tutor.DoesNotExist:
+        return render(request, 'teachers/tutor_dashboard.html', {'error': 'Tutor profile not found.'})
 
-def teacher_list(request):
-    teachers = Teacher.objects.all()
-    return render(request, 'teachers/teacher_list.html', {'teachers': teachers})
+    upcoming_sessions = Session.objects.filter(
+        tutor=tutor,
+        start_time__gt=timezone.now(),
+        status='scheduled'
+    ).order_by('start_time')
 
-def teacher_detail(request, pk):
-    teacher = Teacher.objects.get(pk=pk)
-    return render(request, 'teachers/teacher_detail.html', {'teacher': teacher})
+    context = {
+        "tutor_name": request.user.first_name,
+        "sessions": upcoming_sessions,
+    }
+    return render(request, 'teachers/tutor_dashboard.html', context)

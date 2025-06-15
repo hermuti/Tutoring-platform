@@ -4,6 +4,7 @@ from django.contrib.auth import login
 from .forms import CustomLoginForm, CustomRegisterForm
 from .models import CustomUser
 from django.contrib import messages
+from students.models import Tutor
 
 def home_view(request):
     return render(request, 'home/home.html')
@@ -23,7 +24,15 @@ class CustomLoginView(LoginView):
         if role == 'student':
             return redirect('students:student_dashboard')  # Change based on your URLs
         elif role == 'teacher':
-            return redirect('teachers:dashboard')
+            try:
+                tutor = Tutor.objects.get(user=user)
+                if not tutor.is_verified:
+                    form.add_error(None, "Your account is not yet verified.")
+                    return self.form_invalid(form)
+                return redirect('teachers:tutor_dashboard')
+            except Tutor.DoesNotExist:
+                form.add_error(None, "Tutor profile not found.")
+                return self.form_invalid(form)
         else:
             return redirect('/admin/')
 
@@ -32,6 +41,8 @@ def register_view(request):
         form = CustomRegisterForm(request.POST)
         if form.is_valid():
             user = form.save()
+            if user.role == 'teacher':
+                Tutor.objects.create(user=user)
             messages.success(request, "Account created successfully. Please log in.")
             return redirect('home:login')
     else:

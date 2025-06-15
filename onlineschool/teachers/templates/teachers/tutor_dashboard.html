@@ -1,0 +1,105 @@
+{% extends 'base.html' %} {% load static %} {% block title %} Tutor Dashboard
+{%endblock %} {% block content %}
+<div class="container-fluid">
+  <div class="row">
+    <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-light sidebar">
+      <div class="sidebar-sticky">
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <a class="nav-link active" href="#">
+              <i class="fas fa-home"></i>
+              Dashboard <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              <i class="fas fa-calendar"></i>
+              My Schedule
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              <i class="fas fa-book"></i>
+              My Courses
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              <i class="fas fa-users"></i>
+              My Students
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              <i class="fas fa-money-bill-wave"></i>
+              Earnings
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              <i class="fas fa-user"></i>
+              Profile
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+      <div
+        class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom"
+      >
+        <h1 class="h2">Tutor Dashboard</h1>
+        <div class="btn-toolbar mb-2 mb-md-0">
+          <div class="btn-group mr-2">
+            <button type="button" class="btn btn-sm btn-outline-secondary">
+              Share
+            </button>
+            <button type="button" class="btn btn-sm btn-outline-secondary">
+              Export
+            </button>
+          </div>
+          <button
+            type="button"
+            class="btn btn-sm btn-outline-secondary dropdown-toggle"
+          >
+            <span data-feather="calendar"></span>
+            This week
+          </button>
+        </div>
+      </div>
+
+      <h2>Welcome back, {{ tutor_name }}!</h2>
+
+      <h3>Today's Sessions</h3>
+      <div class="row">
+        {% if sessions %} {% for session in sessions %}
+        <div class="col-md-4">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">{{ session.course.name }}</h5>
+              <p class="card-text">
+                Student: {{ session.student.user.first_name }} {{
+                session.student.user.last_name }}
+              </p>
+              <p class="card-text">Status: {{ session.status }}</p>
+              <p class="card-text">
+                <small class="text-muted"
+                  >{{ session.start_time|time }} - {{ session.end_time|time
+                  }}</small
+                >
+              </p>
+              <a href="#" class="btn btn-primary">Start Session</a>
+              <a href="#" class="btn btn-secondary">Message</a>
+              <a href="#" class="btn btn-info">View Details</a>
+            </div>
+          </div>
+        </div>
+        {% endfor %} {% else %}
+        <p>No sessions scheduled for today.</p>
+        {% endif %}
+      </div>
+    </main>
+  </div>
+</div>
+{% endblock %}

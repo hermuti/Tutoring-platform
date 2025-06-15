@@ -10,6 +10,11 @@ class StudentProfile(models.Model):
 
 class Tutor(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, primary_key=True)
+    is_verified = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.user.get_full_name() or self.user.username
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, primary_key=True)
 
     def __str__(self):
         return self.user.get_full_name() or self.user.username

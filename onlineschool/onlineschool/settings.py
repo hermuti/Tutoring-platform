@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'teachers',
     'courses',
     'home',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -124,7 +125,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
@@ -132,4 +134,5 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'home.CustomUser'
-AUTH_USER_MODEL = 'home.CustomUser'
+
+LOGIN_REDIRECT_URL = 'teachers:tutor_dashboard'
