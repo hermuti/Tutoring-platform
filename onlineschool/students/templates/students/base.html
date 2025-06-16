@@ -5,10 +5,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{% block title %}Online School Platform{% endblock %}</title>
-    {# Link to your main CSS file [38, 39] #}
     <link rel="stylesheet" href="{% static 'css/style.css' %}" />
-    {# For icons, you might use Font Awesome (requires internet access or local
-    download): #}
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
@@ -17,15 +14,14 @@
   <body>
     <div class="main-container">
       <header class="site-header">
-        {# Add header content if desired, e.g., platform logo, app name #}
         <h1>Online Tutoring</h1>
       </header>
 
       <div class="content-wrapper">
-        <aside class="sidebar">
+        <!-- <aside class="sidebar">
           {# Include the sidebar navigation partial template #} {% include
           "students/sidebar.html" %}
-        </aside>
+        </aside> -->
 
         <main class="main-content">
           {% block content %} {# Content from child templates will be inserted

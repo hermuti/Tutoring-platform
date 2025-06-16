@@ -1,52 +1,41 @@
-{% load static %} {# Necessary if you link local static files like Font Awesome
-#} {# Assuming Font Awesome is linked in your base.html or here #} {# Example
-Font Awesome link in
-<head>
-  (outside this file, usually in base.html): #} {#
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
-  />
-  #}
-
-  <nav class="sidebar-nav">
-    <ul>
-      <li>
-        <a href="{% url 'students:student_dashboard' %}"
-          ><i class="fas fa-home"></i> Dashboard</a
-        >
-      </li>
-      <li>
-        <a href="#"><i class="fas fa-calendar-alt"></i> My Sessions</a>
-      </li>
-      <li>
-        <a href="#"><i class="fas fa-search"></i> Find Tutors</a>
-      </li>
-      <li>
-        <a href="#"><i class="fas fa-history"></i> Session History</a>
-      </li>
-      <li>
-        <a href="#"><i class="fas fa-chart-line"></i> My Progress</a>
-      </li>
-      <li>
-        <a href="#"><i class="fas fa-user"></i> Profile</a>
-      </li>
-      {% if request.user.is_authenticated %}
-      <li>
-        <form method="post" action="{% url 'accounts:logout' %}">
-          {% csrf_token %}
-          <button type="submit">
-            <i class="fas fa-sign-out-alt"></i> Log Out
-          </button>
-        </form>
-      </li>
-      {% else %}
-      <li>
-        <a href="{% url 'accounts:login' %}"
-          ><i class="fas fa-sign-in-alt"></i> Log In</a
-        >
-      </li>
-      {% endif %}
-    </ul>
-  </nav>
-</head>
+{% load static %}
+<nav class="sidebar-nav">
+  <ul>
+    <li>
+      <a href="{% url 'students:student_dashboard' %}"
+        ><i class="fas fa-home"></i> Dashboard</a
+      >
+    </li>
+    <li>
+      <a href="#"><i class="fas fa-calendar-alt"></i> My Sessions</a>
+    </li>
+    <li>
+      <a href="#"><i class="fas fa-search"></i> Find Tutors</a>
+    </li>
+    <li>
+      <a href="#"><i class="fas fa-history"></i> Session History</a>
+    </li>
+    <li>
+      <a href="#"><i class="fas fa-chart-line"></i> My Progress</a>
+    </li>
+    <li>
+      <a href="#"><i class="fas fa-user"></i> Profile</a>
+    </li>
+    {% if request.user.is_authenticated %}
+    <li>
+      <form method="post" action="{% url 'accounts:logout' %}">
+        {% csrf_token %}
+        <button type="submit">
+          <i class="fas fa-sign-out-alt"></i> Log Out
+        </button>
+      </form>
+    </li>
+    {% else %}
+    <li>
+      <a href="{% url 'accounts:login' %}"
+        ><i class="fas fa-sign-in-alt"></i> Log In</a
+      >
+    </li>
+    {% endif %}
+  </ul>
+</nav>

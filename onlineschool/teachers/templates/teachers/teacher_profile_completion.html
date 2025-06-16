@@ -1,0 +1,25 @@
+{% extends 'base.html' %} {% load static %} {% block title %}Complete Your
+Profile{% endblock %} {% block content %}
+<div class="container">
+  <h1>Complete Your Profile</h1>
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <label for="{{ form.bio.id_for_label }}">Bio:</label>
+    {{ form.bio }}
+
+    <label for="{{ form.qualifications.id_for_label }}">Qualifications:</label>
+    {{ form.qualifications }}
+
+    <label for="{{ form.documents.id_for_label }}">Documents:</label>
+    {{ form.documents }}
+
+    <label for="{{ form.years_of_experience.id_for_label }}"
+      >Years of Experience:</label
+    >
+    {{ form.years_of_experience }}
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>
+{% endblock %}

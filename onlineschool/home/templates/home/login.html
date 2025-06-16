@@ -1,5 +1,6 @@
-{% extends "base.html" %} {% block title %}Login - Online School{% endblock %}
-{% block content %}
+{% extends "base.html" %}{% load static %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}" />
+{% block title %}Login - Online School{% endblock %} {% block content %}
 <div class="auth-container">
   <h2 class="text-center mb-4">Login</h2>
 
@@ -32,4 +33,10 @@
     Don't have an account? <a href="{% url 'home:register' %}">Register here</a>
   </p>
 </div>
-{% endblock %}
+{% if user.is_authenticated and user.role == 'teacher' %}
+<p class="mt-4 text-center">
+  <a href="{% url 'teachers:teacher_profile_completion' %}"
+    >Complete Your Teacher Profile</a
+  >
+</p>
+{% endif %} {% endblock %}

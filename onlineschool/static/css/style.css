@@ -41,13 +41,14 @@ body {
 }
 
 .welcome-banner {
-  background-color: #5b76e5; /* Blue banner from image */
-  color: white;
-  padding: 20px;
-  margin: 0 20px 20px; /* Adjust padding and margin as needed */
-  border-radius: 8px;
-  font-size: 1.2em;
-  font-weight: bold;
+  background: linear-gradient(
+    to right,
+    #4a90e2,
+    #63b8ff
+  ); /* Example gradient color */
+  color: #fff;
+  padding: 15px 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .sidebar-nav ul {
@@ -110,15 +111,12 @@ body {
 }
 
 .session-card {
-  background-color: #ffffff;
+  background-color: #fff;
+  border: 1px solid #ddd;
   border-radius: 8px;
   padding: 20px;
-  margin-bottom: 15px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
-  display: flex;
-  flex-wrap: wrap; /* Allows wrapping on smaller screens */
-  justify-content: space-between;
-  align-items: center;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .session-info {
@@ -182,7 +180,7 @@ body {
 }
 
 .btn-primary {
-  background-color: #5b76e5; /* Primary blue */
+  background-color: #007bff; /* Primary blue */
   color: white;
 }
 
@@ -219,11 +217,11 @@ body {
 /* Login Page specific styles (optional) */
 .login-container {
   max-width: 400px;
-  margin: 50px auto;
-  padding: 30px;
-  background-color: #ffffff;
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  margin: 100px auto; /* Increased margin for better centering */
+  padding: 40px; /* Increased padding for more spacing */
+  background-color: #f9f9f9; /* Light gray background */
+  border-radius: 12px; /* More rounded corners */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Stronger shadow */
   text-align: center;
 }
 
@@ -324,12 +322,14 @@ body {
 
 /* Welcome banner styling */
 .welcome-banner {
-  background-color: #6a5acd; /* Example purple-blue color */
+  background: linear-gradient(
+    to right,
+    #4a90e2,
+    #63b8ff
+  ); /* Example gradient color */
   color: #fff;
   padding: 15px 20px;
-  border-radius: 8px;
-  margin-bottom: 20px;
-  font-size: 1.2em;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .welcome-banner h2 {
@@ -348,9 +348,9 @@ body {
   background-color: #fff;
   border: 1px solid #ddd;
   border-radius: 8px;
-  padding: 15px;
-  margin-bottom: 15px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .session-header {

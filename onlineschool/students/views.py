@@ -10,7 +10,7 @@ from .models import Session, StudentProfile, Tutor
 # 1. Student Dashboard View (matches student.jpg)
 class StudentDashboardView(LoginRequiredMixin, TemplateView):
     template_name = "students/student_dashboard.html"
-    login_url = reverse_lazy('login') # Redirects to this URL if user is not logged in [25]
+    login_url = reverse_lazy('home:login') # Redirects to this URL if user is not logged in [25]
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
